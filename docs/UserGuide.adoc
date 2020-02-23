@@ -422,4 +422,9 @@ e.g. `people find Grace`
 e.g. `people delete 3`
 * *Edit* : `people edit <index> [n/<name>] [p/<phone number>] [e/<email address>]` +
 e.g. `people edit 1 e/johndoe@example.com` +
+
+=== Wallet Commands
+* *delete* : `wallet delete <index>` +
+e.g. `wallet delete 1`
+
 //end::commandSummary[]
