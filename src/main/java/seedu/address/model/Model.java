@@ -1,13 +1,13 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Expense;
 import seedu.address.model.transaction.Income;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -138,4 +138,16 @@ public interface Model {
      * {@code target} must exist in the Wallet.
      */
     void setExpense(Expense target, Expense editedExpense);
+
+    /**
+     * Returns an unmodifiable view of the filtered expense list
+     */
+    ObservableList<Expense> getFilteredExpenseList();
+
+    /**
+     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredExpenseList(Predicate<Expense> predicate);
 }
