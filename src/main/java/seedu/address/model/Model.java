@@ -5,6 +5,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Expense;
 import seedu.address.model.transaction.Income;
+import seedu.address.model.transaction.Transaction;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -140,14 +141,14 @@ public interface Model {
     void setExpense(Expense target, Expense editedExpense);
 
     /**
-     * Returns an unmodifiable view of the filtered expense list
+     * Returns an unmodifiable view of the filtered transaction list
      */
-    ObservableList<Expense> getFilteredExpenseList();
+    ObservableList<Transaction> getFilteredTransactionList();
 
     /**
-     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered transaction list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredExpenseList(Predicate<Expense> predicate);
+    void updateFilteredTransactionList(Predicate<Transaction> predicate);
 }

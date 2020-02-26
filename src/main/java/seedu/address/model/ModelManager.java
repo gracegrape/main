@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Expense;
 import seedu.address.model.transaction.Income;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,6 +26,7 @@ public class ModelManager implements Model {
     private final Wallet wallet;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Transaction> filteredExpenses;
 
     /**
      * Initializes a ModelManager with the given addressBook, wallet and userPrefs.
@@ -40,6 +42,7 @@ public class ModelManager implements Model {
         this.wallet = new Wallet(wallet);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredExpenses = new FilteredList<>(this.wallet.getTransactionList());
     }
 
     /**
@@ -184,6 +187,18 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+    @Override
+    public ObservableList<Expense> getFilteredExpenseList() {
+        return filteredPersons;
+    }
+
+    @Override
+    public void updateFilteredPersonList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
