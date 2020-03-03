@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.people;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliPrefix.PEOPLE_COMMAND_TYPE;
 
 import java.util.List;
 
@@ -22,7 +23,8 @@ public class PeopleDeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + PEOPLE_COMMAND_TYPE + " "
+            + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 

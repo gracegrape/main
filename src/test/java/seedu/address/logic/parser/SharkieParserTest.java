@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliPrefix.PEOPLE_COMMAND_TYPE;
 import static seedu.address.logic.parser.CliPrefix.WALLET_COMMAND_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDebts.TEXTBOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -24,6 +25,7 @@ import seedu.address.logic.commands.people.PeopleEditCommand;
 import seedu.address.logic.commands.people.PeopleEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.people.PeopleFindCommand;
 import seedu.address.logic.commands.people.PeopleListCommand;
+import seedu.address.logic.commands.people.PeopleOweCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -94,6 +96,14 @@ public class SharkieParserTest {
                 instanceof PeopleListCommand);
         assertTrue(parser.parseCommand(PEOPLE_COMMAND_TYPE + " " + PeopleListCommand.COMMAND_WORD + " 3")
                 instanceof PeopleListCommand);
+    }
+
+    @Test
+    public void parseCommand_owe() throws Exception {
+        PeopleOweCommand command = (PeopleOweCommand) parser.parseCommand(PEOPLE_COMMAND_TYPE + " "
+                + PeopleOweCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PersonUtil.getDebtDescription(TEXTBOOK));
+        assertEquals(new PeopleOweCommand(INDEX_FIRST_PERSON, TEXTBOOK), command);
     }
 
     @Test

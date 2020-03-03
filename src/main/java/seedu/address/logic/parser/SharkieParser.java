@@ -18,11 +18,13 @@ import seedu.address.logic.commands.people.PeopleDeleteCommand;
 import seedu.address.logic.commands.people.PeopleEditCommand;
 import seedu.address.logic.commands.people.PeopleFindCommand;
 import seedu.address.logic.commands.people.PeopleListCommand;
+import seedu.address.logic.commands.people.PeopleOweCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.people.PeopleAddCommandParser;
 import seedu.address.logic.parser.people.PeopleDeleteCommandParser;
 import seedu.address.logic.parser.people.PeopleEditCommandParser;
 import seedu.address.logic.parser.people.PeopleFindCommandParser;
+import seedu.address.logic.parser.people.PeopleOweCommandParser;
 
 /**
  * Parses user input.
@@ -90,6 +92,9 @@ public class SharkieParser {
 
         case PeopleListCommand.COMMAND_WORD:
             return new PeopleListCommand();
+
+        case PeopleOweCommand.COMMAND_WORD:
+            return new PeopleOweCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -2,10 +2,11 @@ package seedu.address.model.transaction;
 
 /**
  * Represents an Amount of money.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidAmount(String)}
  */
 public class Amount implements Comparable<Amount> {
 
+    public static final String MESSAGE_CONSTRAINTS = "Amount of money should only contain numbers.";
     public final double amount;
 
     /**
@@ -27,6 +28,16 @@ public class Amount implements Comparable<Amount> {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    /**
+     * Adds {@code amountToAdd} to the current amount.
+     *
+     * @return the total amount after adding.
+     */
+    public Amount add(Amount amountToAdd) {
+        double totalAmount = amountToAdd.amount + this.amount;
+        return new Amount(totalAmount);
     }
 
 

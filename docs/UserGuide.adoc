@@ -14,15 +14,16 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level3
+:repoURL: https://github.com/AY1920S2-CS2103T-W12-3/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `AY1920S2-CS2103T-W12-3`      Since: `Feb 2020`      Licence: `MIT`
+
 //tag::intro[]
 == Introduction
 
-Sharkie is an all-in-one desktop application for *personal finance tracking*. It manages your *incomes and expenses*, organises your *contacts* and keeps track of *debts* your friends owe you so that your loans always come with a money-back guarantee!
+*Sharkie* is an all-in-one desktop application for *personal finance tracking*. It manages your *incomes and expenses*, organises your *contacts* and keeps track of *debts* your friends owe you, so that your loans always come with a money-back guarantee!
 
-Sharkie boasts a sleek, trendy Graphical User Interface (GUI) while being at its core a *Command Line Application* - this means that the faster you type, the faster you can get those pesky finances out of your head and into Sharkie's management system.
+*Sharkie* boasts a sleek, trendy Graphical User Interface (GUI) while being at its core a *Command Line Application* - this means that the faster you type, the faster you can get those pesky finances out of your head and into Sharkie's management system.
 
 Have we reeled you in? Dive into <<Quick Start>> to get on board with Sharkie. Enjoy!
 //end::intro[]
@@ -38,9 +39,8 @@ If you need help regarding what commands *Sharkie* has, our Features section bel
 
 Note the following symbols and formatting used in this document: +
 
-[cols="1,9"]
 |===
-|`command`
+<|`command`
 |A grey highlight (called a mark-up) indicates that this is a command that can be typed into the command line and executed by the application.
 |===
 
@@ -106,7 +106,6 @@ _{explain how the user can enable/disable data encryption}_
 //tag::expenditureSummary[]
 === Expenditure Summary `[coming in v2.0]`
 *Sharkie* displays a customisable overview of your monthly spendings and income so that you know where all your money has gone to! +
-
 You can view statistics such as the proportion of your spending on different items and your monthly balance.
 
 //end::expenditureSummary[]
@@ -166,7 +165,7 @@ Expected Outcome:
 //tag::walletincome[]
 ==== Adding an income: `income`
 
-Addns an income to the wallet. +
+Adds an income to the wallet. +
 Format: `wallet income n/<description> $/<amount> [d/<date: dd/mm/yyyy>] [t/<tag>]`
 
 ****
@@ -237,7 +236,7 @@ Expected Outcome:
 //tag::walletfind[]
 ==== Finding an income or expense: `find`
 
-Find an income or expense in your wallet by the keyword inputted. +
+Finds an income or expense in your wallet by the keyword inputted. +
 Format: `wallet find <keyword>`
 
 ****
@@ -291,7 +290,7 @@ Format: `wallet budget $/amount`
 
 Examples:
 
-* `wallet budget $/1000` sets a budget of $1000. +
+* `wallet budget $/1000` Sets a budget of $1000. +
 Expected outcome:
 
     Budget has been set at $1000!
@@ -353,10 +352,10 @@ Expected Outcome:
 //end::peopleremindall[]
 
 // tag::owe[]
-==== Recording the money you owe: `owe` `[coming in v2.0]`
+==== Recording the money you owe: `owe`
 
 Records the amount of money that you owe a person. +
-Format: `people owe <index> $/<amount> [d/<date:dd/mm/yyyy>]`
+Format: `people owe <index> n/<description> $/<amount> [d/<date:dd/mm/yyyy>]`
 
 ****
 * Records the amount of money specified in `<amount>` you owe to the person at the specified `<index>`.
@@ -367,11 +366,11 @@ Format: `people owe <index> $/<amount> [d/<date:dd/mm/yyyy>]`
 
 Examples:
 
-* `people owe 4 $/5.00 d/10/10/2020`
+* `people owe 4 n/food $/5.00 d/10/10/2020`
 Records that you owe the 4th person $5.00 on 10/10/2020. +
 Expected Outcome:
 
-    Increased debt to Grace by $5.00!
+    Increased debt to Grace by $5.00! You now owe Grace $4.
 
 // end::owe[]
 
@@ -483,27 +482,27 @@ Expected Outcome:
 * *Exit* : `exit`
 
 === Wallet Commands
-* *Expense* `wallet expense n/<description> $/<amount> [d/<date: dd/mm/yyyy>] [t/<tag>]` +
+* *Expense* : `wallet expense n/<description> $/<amount> [d/<date: dd/mm/yyyy>] [t/<tag>]` +
 e.g. `wallet expense n/Chicken Rice $/3.50 d/10/10/2010 t/food`
-* *Income* `wallet income n/<description> $/<amount> [d/<date: dd/mm/yyyy>] [t/<tag>]` +
+* *Income* : `wallet income n/<description> $/<amount> [d/<date: dd/mm/yyyy>] [t/<tag>]` +
 e.g. `wallet income n/P6 Tuition $/3000 d/10/10/2010 t/job`
-* *Tag* `wallet tag <index> t/<tag>` +
+* *Tag* : `wallet tag <index> t/<tag>` +
 e.g. `tag 1 t/food`
-* *Edit* `wallet edit <index> [n/<name>] [d/<date>] [$/<amount>] [t/<tag>]` +
+* *Edit* : `wallet edit <index> [n/<name>] [d/<date>] [$/<amount>] [t/<tag>]` +
 e.g. `wallet edit 1 n/Duck rice $/4.00`
-* *Find* `wallet find <keyword>` +
+* *Find* : `wallet find <keyword>` +
 e.g. `wallet find rice`
-* *Delete* `wallet delete <index>` +
+* *Delete* : `wallet delete <index>` +
 e.g. `wallet delete 1`
-* *Budget* `wallet budget $/<amount>` +
+* *Budget* : `wallet budget $/<amount>` +
 e.g. `wallet budget $/1000`
 
 === People Commands
-* *Add* `people add n/<name> p/<phone number> e/<email address>` +
+* *Add* : `people add n/<name> p/<phone number> e/<email address>` +
 e.g. `people add n/Joel p/91234567 e/joel@u.nus.edu`
-* *Remind* `people remind <index>` +
+* *Remind* : `people remind <index>` +
 e.g. `people remind 1`
-* *Remind all* `people remindall`
+* *Remind all* : `people remindall`
 * *Owe* : `people owe <index> $/<amount> [d/<date:dd/mm/yyyy>]` +
 e.g. `people owe 4 $/5.00 d/10/10/2020`
 * *Lend* : `people lend <index> $/<amount> [d/<date:dd/mm/yyyy>]` +

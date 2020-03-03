@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.people;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliPrefix.PEOPLE_COMMAND_TYPE;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -19,7 +20,8 @@ public class PeopleFindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + PEOPLE_COMMAND_TYPE + " "
+            + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
 

@@ -21,6 +21,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.transaction.Debt;
+import seedu.address.model.transaction.TransactionList;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -46,9 +48,11 @@ public class PeopleAddCommandParser implements Parser<PeopleAddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        //add command does not allow adding debts straight away
+        TransactionList<Debt> debts = new TransactionList<>();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, tagList);
+        Person person = new Person(name, phone, email, debts, tagList);
 
         return new PeopleAddCommand(person);
     }

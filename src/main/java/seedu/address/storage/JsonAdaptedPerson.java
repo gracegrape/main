@@ -15,6 +15,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.transaction.Debt;
+import seedu.address.model.transaction.TransactionList;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -26,6 +28,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final List<JsonAdaptedDebt> debts = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -34,10 +37,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email,
+                             @JsonProperty("debts") List<JsonAdaptedDebt> debts,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        if (debts != null) {
+            this.debts.addAll(debts);
+        }
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -50,6 +57,10 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        debts.addAll(source.getDebts().asUnmodifiableObservableList()
+                .stream()
+                .map(JsonAdaptedDebt::new)
+                .collect(Collectors.toList()));
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -64,6 +75,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Debt> debtsToPerson = new ArrayList<>();
+        for (JsonAdaptedDebt debt : debts) {
+            debtsToPerson.add(debt.toModelType());
         }
 
         if (name == null) {
@@ -89,9 +105,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
-
+        final TransactionList<Debt> modelDebts = new TransactionList<>();
+        modelDebts.setTransactions(debtsToPerson);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelDebts, modelTags);
     }
 
 }
