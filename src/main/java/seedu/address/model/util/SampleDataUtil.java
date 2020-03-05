@@ -16,7 +16,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Debt;
 import seedu.address.model.transaction.Description;
+import seedu.address.model.transaction.Loan;
 import seedu.address.model.transaction.TransactionList;
+
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -28,23 +30,34 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     getDebtList(new Debt(new Description("Supper"), new Amount(5),
                             LocalDate.parse("2020-02-03"))),
-                    getTagSet(
-                            "friends")),
+                    getLoanList(new Loan(new Description("Breakfast"), new Amount(3),
+                            LocalDate.parse("2018-08-08"))),
+                    getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     getDebtList(new Debt(new Description("Shopping"), new Amount(102),
-                            LocalDate.parse("2020-01-01"))), getTagSet("colleagues",
-                    "friends")),
+                            LocalDate.parse("2020-01-01"))),
+                    getLoanList(new Loan(new Description("Lunch"), new Amount(12),
+                                    LocalDate.parse("2019-09-09")),
+                            new Loan(new Description("Movie"), new Amount(10),
+                                    LocalDate.parse("2020-02-02"))),
+                    getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     getDebtList(new Debt(new Description("Gift for someone"), new Amount(10),
                             LocalDate.parse("2019-12-12")),
                             new Debt(new Description("Movie"), new Amount(13),
-                            LocalDate.parse("2019-12-10"))), getTagSet("neighbours")),
+                            LocalDate.parse("2019-12-10"))),
+                    getLoanList(new Loan(new Description("Shopping"), new Amount(150),
+                            LocalDate.parse("2018-08-18"))),
+                    getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    getDebtList(), getTagSet("family")),
+                    getDebtList(),
+                    getLoanList(new Loan(new Description("Supper"), new Amount(8),
+                            LocalDate.parse("2020-02-24"))),
+                    getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    getDebtList(), getTagSet("classmates")),
+                    getDebtList(), getLoanList(), getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    getDebtList(), getTagSet("colleagues"))
+                    getDebtList(), getLoanList(), getTagSet("colleagues"))
         };
     }
 
@@ -65,6 +78,17 @@ public class SampleDataUtil {
         TransactionList<Debt> debtList = new TransactionList<>();
         debtList.setTransactions(list);
         return debtList;
+    }
+
+    /**
+     * Returns a list of loans containing the {@code loanss} given.
+     */
+    public static TransactionList<Loan> getLoanList(Loan... loans) {
+        List<Loan> list = Arrays.stream(loans)
+                .collect(Collectors.toList());
+        TransactionList<Loan> loanList = new TransactionList<>();
+        loanList.setTransactions(list);
+        return loanList;
     }
 
     /**

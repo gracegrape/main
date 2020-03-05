@@ -250,9 +250,9 @@ Examples:
 Returns a list of expenses and income containing the keyword <rice> +
 Expected Outcome:
 
-    1. Duck Rice Date: 10/10/2010 Amount: $4.00
-    2. Chicken Rice Date: 10/11/2010 Amount: $2.50
-    ...​
+1. Duck Rice Date: 10/10/2010 Amount: $4.00
+2. Chicken Rice Date: 10/11/2010 Amount: $2.50
+...​
 
 //end::walletfind[]
 
@@ -355,7 +355,7 @@ Expected Outcome:
 ==== Recording the money you owe: `owe`
 
 Records the amount of money that you owe a person. +
-Format: `people owe <index> n/<description> $/<amount> [d/<date:dd/mm/yyyy>]`
+Format: `people owe <index> n/<description> $/<amount> d/<date:dd/mm/yyyy>`
 
 ****
 * Records the amount of money specified in `<amount>` you owe to the person at the specified `<index>`.
@@ -370,15 +370,15 @@ Examples:
 Records that you owe the 4th person $5.00 on 10/10/2020. +
 Expected Outcome:
 
-    Increased debt to Grace by $5.00! You now owe Grace $4.
+    Increased debt to Grace by $5.00! You now owe Grace $10.00.
 
 // end::owe[]
 
 // tag::lend[]
-==== Recording the money you lend: `lend` `[coming in v2.0]`
+==== Recording the money you lend: `lend`
 
 Records the amount of money that you lend to a person. This will increase that person's debt. +
-Format: `people lend <index> $/<amount> [d/<date:dd/mm/yyyy>]`
+Format: `people lend <index> n/<description> $/<amount> d/<date:dd/mm/yyyy>`
 
 ****
 * Records the amount of money specified in `<price>` you owe to the person at the specified `<index>`.
@@ -389,11 +389,11 @@ Format: `people lend <index> $/<amount> [d/<date:dd/mm/yyyy>]`
 
 Examples:
 
-* `people lend 5 $/5.00 d/10/10/2020`
+* `people lend 5 n/dinner $/5.00 d/10/10/2020`
 Records that you lend the 5th person $5.00 on 10/10/2020. +
 Expected Outcome:
 
-    Increased Syin Yi's debt by $5.00!
+    Increased loan to Syin Yi by $5.00. Syin Yi now owes you $8.00.
 
 // end::lend[]
 
@@ -503,10 +503,10 @@ e.g. `people add n/Joel p/91234567 e/joel@u.nus.edu`
 * *Remind* : `people remind <index>` +
 e.g. `people remind 1`
 * *Remind all* : `people remindall`
-* *Owe* : `people owe <index> $/<amount> [d/<date:dd/mm/yyyy>]` +
-e.g. `people owe 4 $/5.00 d/10/10/2020`
-* *Lend* : `people lend <index> $/<amount> [d/<date:dd/mm/yyyy>]` +
-e.g. `people lend 5 $/5.00 d/10/10/2020`
+* *Owe* : `people owe <index> n/<description> $/<amount> d/<date:dd/mm/yyyy>` +
+e.g. `people owe 4 n/lunch $/5.00 d/10/10/2020`
+* *Lend* : `people lend <index> n/<description> $/<amount> d/<date:dd/mm/yyyy>` +
+e.g. `people lend 5 n/dinner $/5.00 d/10/10/2020`
 * *Find* : `people find <keyword>` +
 e.g. `people find Grace`
 * *Delete* : `people delete <index>` +

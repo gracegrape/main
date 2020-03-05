@@ -13,12 +13,19 @@
 
 == Summary of contributions
 
+* *Major enhancement*:
+
+** Added People's command, `lend`
+*** What it does: Allows the user to record the amount of money lent to other people in the address book.
+*** Credits: Implemented based on http://github.com/cheyannesim[Cheyanne]'s `people owe` command.
+
 * *Other contributions*:
 
 ** Project management:
-*** Finalized and tagged `v1.1`.
+*** Finalized and tagged `v1.1`. (Pull request https://github.com[#80], https://github.com[#82], https://github.com[#83])
 ** Documentation:
 *** Updated the product's website heading: (Pull request https://github.com[#44])
+*** Edited the product's website navigation bar: (Pull request https://github.com[#81])
 *** Edited various parts of the User Guide: (Pull request https://github.com[#49])
 *** Updated the Use Cases Appendix in the Developer Guide: (Pull request https://github.com[#51])
 

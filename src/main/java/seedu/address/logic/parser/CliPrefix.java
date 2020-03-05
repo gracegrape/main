@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 /**
-* Contains Command Line Interface (CLI) prefix definitions common to multiple commands
+ * Contains Command Line Interface (CLI) prefix definitions common to multiple commands
  */
 public class CliPrefix {
     public static final String PEOPLE_COMMAND_TYPE = "people";

@@ -9,6 +9,11 @@
         "amount" : "10",
         "date" : "2020-01-23"
       }],
+      "loans" : [ {
+        "description" : "Breakfast",
+        "amount" : "5",
+        "date" : "2018-08-08"
+      }],
       "tagged": [
         "friends"
       ]
@@ -21,6 +26,11 @@
         "description" : "Supper",
         "amount" : "10",
         "date" : "2020-01-23"
+      }],
+      "loans" : [ {
+        "description" : "Breakfast",
+        "amount" : "5",
+        "date" : "2018-08-08"
       }]
     }
   ]

@@ -52,13 +52,17 @@ public class CommandTestUtil {
             + PREFIX_AMOUNT + VALID_AMOUNT_AMY + " " + PREFIX_DATE + VALID_DATE_AMY;
     public static final String OWE_DESC_BOB = " " + PREFIX_NAME + VALID_DESC_BOB + " "
             + PREFIX_AMOUNT + VALID_AMOUNT_BOB;
+    public static final String LEND_DESC_AMY = " " + PREFIX_NAME + VALID_DESC_AMY + " "
+            + PREFIX_AMOUNT + VALID_AMOUNT_AMY + " " + PREFIX_DATE + VALID_DATE_AMY;
+    public static final String LEND_DESC_BOB = " " + PREFIX_NAME + VALID_DESC_BOB + " "
+            + PREFIX_AMOUNT + VALID_AMOUNT_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_DEBT_DESC = " " + PREFIX_NAME + ""; // description cannot be empty
+    public static final String INVALID_TRANSACTION_DESC = " " + PREFIX_NAME + ""; // description cannot be empty
     public static final String INVALID_AMOUNT = " " + PREFIX_AMOUNT + "9ab"; // only numbers allowed in amount
     public static final String INVALID_DATE = " " + PREFIX_DATE + "20 May 2020"; // date in wrong format
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags

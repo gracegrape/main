@@ -26,32 +26,31 @@ import seedu.address.model.transaction.Loan;
 import seedu.address.model.transaction.TransactionList;
 
 /**
- * Records the amount of money the user owe to the person identified using its displayed index from the
- * address book.
+ * Records the amount of money the user lends to a person.
  */
-public class PeopleOweCommand extends Command {
+public class PeopleLendCommand extends Command {
 
-    public static final String COMMAND_WORD = "owe";
+    public static final String COMMAND_WORD = "lend";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records the amount of money that you owe a"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records the amount of money that you lend to a"
             + " person. Parameters: <index> (must be a positive integer) "
             + PREFIX_NAME + "<description> "
             + PREFIX_AMOUNT + "<amount> "
             + "[" + PREFIX_DATE + "<date:dd/mm/yyyy>]\n"
             + "Example: " + PEOPLE_COMMAND_TYPE + " "
             + COMMAND_WORD + " 4 "
-            + PREFIX_NAME + "Supper "
-            + PREFIX_AMOUNT + "5.00 "
-            + PREFIX_DATE + "10/10/2020";
+            + PREFIX_NAME + "Dinner "
+            + PREFIX_AMOUNT + "10.00 "
+            + PREFIX_DATE + "02/02/2020";
 
-    public static final String MESSAGE_OWE_SUCCESS = "Increased debt to %1$s by %2$s. You now owe %1$s %3$s.";
+    public static final String MESSAGE_LEND_SUCCESS = "Increased loan to %1$s by %2$s. %1$s now owes you %3$s.";
 
     private final Index targetIndex;
-    private final Debt debt;
+    private final Loan loan;
 
-    public PeopleOweCommand(Index targetIndex, Debt debt) {
+    public PeopleLendCommand(Index targetIndex, Loan loan) {
         this.targetIndex = targetIndex;
-        this.debt = debt;
+        this.loan = loan;
     }
 
     @Override
@@ -63,37 +62,37 @@ public class PeopleOweCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personUserOwe = lastShownList.get(targetIndex.getZeroBased());
-        Person addedDebtPerson = createPersonOwed(personUserOwe, debt);
-        model.setPerson(personUserOwe, addedDebtPerson);
+        Person personUserLends = lastShownList.get(targetIndex.getZeroBased());
+        Person addedLoanPerson = createPersonLends(personUserLends, loan);
+        model.setPerson(personUserLends, addedLoanPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_OWE_SUCCESS, personUserOwe.getName(),
-                debt.getAmount(), addedDebtPerson.getDebts().getTotal()));
+        return new CommandResult(String.format(MESSAGE_LEND_SUCCESS, personUserLends.getName(),
+                loan.getAmount(), addedLoanPerson.getLoans().getTotal()));
     }
 
     /**
-     * Creates and returns a {@code Person} after adding {@code debt} the user owes to the person.
+     * Creates and returns a {@code Person} after adding the {@code loan} the user lends to the person.
      */
-    private static Person createPersonOwed(Person personUserOwe, Debt debt) {
-        assert personUserOwe != null;
+    private static Person createPersonLends(Person personUserLends, Loan loan) {
+        assert personUserLends != null;
 
-        Name name = personUserOwe.getName();
-        Phone phone = personUserOwe.getPhone();
-        Email email = personUserOwe.getEmail();
-        TransactionList<Debt> updatedDebt = new TransactionList<>();
-        updatedDebt.setTransactions(personUserOwe.getDebts());
-        updatedDebt.add(debt);
-        TransactionList<Loan> loans = personUserOwe.getLoans();
-        Set<Tag> tags = personUserOwe.getTags();
-        return new Person(name, phone, email, updatedDebt, loans, tags);
+        Name name = personUserLends.getName();
+        Phone phone = personUserLends.getPhone();
+        Email email = personUserLends.getEmail();
+        TransactionList<Debt> debts = personUserLends.getDebts();
+        TransactionList<Loan> updatedLoans = new TransactionList<>();
+        updatedLoans.setTransactions(personUserLends.getLoans());
+        updatedLoans.add(loan);
+        Set<Tag> tags = personUserLends.getTags();
+        return new Person(name, phone, email, debts, updatedLoans, tags);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof PeopleOweCommand // instanceof handles nulls
-                && targetIndex.equals(((PeopleOweCommand) other).targetIndex))
-                && debt.equals(((PeopleOweCommand) other).debt); // state check
+                || (other instanceof PeopleLendCommand // instanceof handles nulls
+                && targetIndex.equals(((PeopleLendCommand) other).targetIndex))
+                && loan.equals(((PeopleLendCommand) other).loan); // state check
     }
 }
 

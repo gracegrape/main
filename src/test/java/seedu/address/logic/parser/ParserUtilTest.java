@@ -3,9 +3,12 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.model.transaction.Date.DATE_PATTERN;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,6 +22,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.transaction.Amount;
+import seedu.address.model.transaction.Date;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -26,6 +30,10 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_AMOUNT = "91a";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_DATE_1 = "11 May 2019";
+    private static final String INVALID_DATE_2 = "11.11.2020";
+    private static final String INVALID_DATE_3 = "30/02/2020";
+    private static final String INVALID_DATE_4 = "2/2/2020";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +41,7 @@ public class ParserUtilTest {
     private static final String VALID_AMOUNT = "5";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_DATE = "02/02/2020";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -43,8 +52,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -148,7 +157,30 @@ public class ParserUtilTest {
         assertEquals(expectedAmount, ParserUtil.parseAmount(amountWithWhitespace));
     }
 
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
+    }
 
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_3));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_4));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        Date date = new Date(LocalDate.parse(VALID_DATE, DateTimeFormatter.ofPattern(DATE_PATTERN)));
+        assertEquals(date, ParserUtil.parseDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsDate() throws Exception {
+        Date date = new Date(LocalDate.parse(VALID_DATE, DateTimeFormatter.ofPattern(DATE_PATTERN)));
+        assertEquals(date, ParserUtil.parseDate(WHITESPACE + VALID_DATE + WHITESPACE));
+    }
 
     @Test
     public void parseTag_null_throwsNullPointerException() {

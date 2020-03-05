@@ -4,9 +4,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TRANSACTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LEND_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.LEND_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.OWE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.OWE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_AMY;
@@ -26,22 +26,22 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.people.PeopleOweCommand;
+import seedu.address.logic.commands.people.PeopleLendCommand;
 import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.Debt;
 import seedu.address.model.transaction.Description;
+import seedu.address.model.transaction.Loan;
 
-public class PeopleOweCommandParserTest {
+public class PeopleLendCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, PeopleOweCommand.MESSAGE_USAGE);
-    private PeopleOweCommandParser parser = new PeopleOweCommandParser();
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, PeopleLendCommand.MESSAGE_USAGE);
+    private PeopleLendCommandParser parser = new PeopleLendCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
         // no index specified
         assertParseFailure(parser, VALID_NAME_AMY + " " + PREFIX_NAME + VALID_DESC_AMY + " "
-                        + PREFIX_AMOUNT + VALID_AMOUNT_AMY, MESSAGE_INVALID_FORMAT);
+                + PREFIX_AMOUNT + VALID_AMOUNT_AMY, MESSAGE_INVALID_FORMAT);
 
         // no description specified
         assertParseFailure(parser, "1 " + PREFIX_AMOUNT + VALID_AMOUNT_AMY, MESSAGE_INVALID_FORMAT);
@@ -111,13 +111,13 @@ public class PeopleOweCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + OWE_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + LEND_DESC_AMY;
 
-        Debt debt = new Debt(new Description(VALID_DESC_AMY),
+        Loan loan = new Loan(new Description(VALID_DESC_AMY),
                 new Amount(Double.parseDouble(VALID_AMOUNT_AMY)),
                 LocalDate.parse(VALID_DATE_AMY,
-                DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        PeopleOweCommand expectedCommand = new PeopleOweCommand(targetIndex, debt);
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        PeopleLendCommand expectedCommand = new PeopleLendCommand(targetIndex, loan);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -125,12 +125,12 @@ public class PeopleOweCommandParserTest {
     @Test
     public void parse_dateNotSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + OWE_DESC_BOB;
+        String userInput = targetIndex.getOneBased() + LEND_DESC_BOB;
 
-        Debt debt = new Debt(new Description(VALID_DESC_BOB),
+        Loan loan = new Loan(new Description(VALID_DESC_BOB),
                 new Amount(Double.parseDouble(VALID_AMOUNT_BOB)),
                 LocalDate.now());
-        PeopleOweCommand expectedCommand = new PeopleOweCommand(targetIndex, debt);
+        PeopleLendCommand expectedCommand = new PeopleLendCommand(targetIndex, loan);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

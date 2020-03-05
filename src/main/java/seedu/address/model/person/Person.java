@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.transaction.Debt;
+import seedu.address.model.transaction.Loan;
 import seedu.address.model.transaction.TransactionList;
 
 /**
@@ -24,18 +25,20 @@ public class Person {
 
     // Data fields
     private final TransactionList<Debt> debts = new TransactionList<>();
+    private final TransactionList<Loan> loans = new TransactionList<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email,
-                  TransactionList<Debt> debts, Set<Tag> tags) {
+                  TransactionList<Debt> debts, TransactionList<Loan> loans, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.debts.setTransactions(debts);
+        this.loans.setTransactions(loans);
         this.tags.addAll(tags);
     }
 
@@ -53,6 +56,10 @@ public class Person {
 
     public TransactionList<Debt> getDebts() {
         return debts;
+    }
+
+    public TransactionList<Loan> getLoans() {
+        return loans;
     }
 
     /**
@@ -96,13 +103,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getDebts().equals(getDebts())
+                && otherPerson.getLoans().equals(getLoans())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, debts, tags);
+        return Objects.hash(name, phone, email, debts, loans, tags);
     }
 
     @Override
@@ -115,6 +123,8 @@ public class Person {
                 .append(getEmail())
                 .append(" You owe: ")
                 .append(getDebts().getTotal())
+                .append(" You lent: ")
+                .append(getLoans().getTotal())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
